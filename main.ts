@@ -1,3 +1,19 @@
+radio.onReceivedNumber(function (num) {
+    music.setTempo(180)
+    if (num == 1) {
+        display(rightHandSeq1)
+    } else if (num == 2) {
+        display(rightHandSeq2)
+    }
+})
+radio.onReceivedNumber(function (num) {
+    music.setTempo(180)
+    if (num == 1) {
+        display(leftHandSeq1)
+    } else if (num == 2) {
+        display(leftHandSeq2)
+    }
+})
 input.onButtonPressed(Button.A, function () {
     led.unplot(monPos[0], monPos[1])
     if (monPos[0] != 0) {
@@ -22,6 +38,27 @@ function judge() {
         }
     }
     return scoreArr
+}
+function display(arr: [string, string, number][]) {
+    for (let item4 of arr) {
+        if (item4[0] == "rest") {
+            if (item4[1] == "half") {
+                music.rest(music.beat(BeatFraction.Half))
+            } else if (item4[1] == "whole") {
+                music.rest(music.beat(BeatFraction.Whole))
+            } else if (item4[1] == "double") {
+                music.rest(music.beat(BeatFraction.Double))
+            }
+        } else if (item4[0] == "play") {
+            if (item4[1] == "half") {
+                music.play(music.tonePlayable(item4[2], music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
+            } else if (item4[1] == "whole") {
+                music.play(music.tonePlayable(item4[2], music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
+            } else if (item4[1] == "double") {
+                music.play(music.tonePlayable(item4[2], music.beat(BeatFraction.Double)), music.PlaybackMode.UntilDone)
+            }
+        }
+    }
 }
 input.onButtonPressed(Button.B, function () {
     led.unplot(monPos[0], monPos[1])
@@ -61,10 +98,247 @@ let popBan: number[] = []
 let monPos: number[] = []
 let score = 0
 let second = 1
+let rightHandSeq1: [string, string, number][] = [
+    ["rest", "half", 0],
+    ["play", "half", 370],
+    ["rest", "half", 0],
+    ["play", "half", 440],
+    ["play", "half", 554],
+    ["rest", "half", 0],
+    ["play", "half", 440],
+    ["rest", "half", 0],
+    ["play", "half", 370],
+    ["play", "half", 294],
+    ["play", "half", 294],
+    ["play", "half", 294],
+    ["rest", "whole", 0],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["play", "half", 370],
+    ["play", "half", 440],
+    ["play", "half", 554],
+    ["rest", "half", 0],
+    ["play", "half", 440],
+    ["rest", "half", 0],
+    ["play", "half", 370],
+    ["play", "whole", 659],
+    ["play", "half", 659],
+    ["play", "half", 622],
+    ["play", "half", 587],
+    ["rest", "whole", 0],
+    ["rest", "half", 0],
+    ["play", "half", 415],
+    ["rest", "half", 0],
+    ["play", "half", 554],
+    ["play", "half", 370],
+    ["rest", "half", 0],
+    ["play", "half", 554],
+    ["rest", "half", 0],
+    ["play", "half", 392],
+    ["rest", "half", 0],
+    ["play", "half", 554],
+    ["rest", "half", 0],
+    ["play", "half", 392],
+    ["play", "half", 370],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["play", "half", 330],
+    ["play", "half", 330],
+    ["play", "half", 330],
+    ["rest", "whole", 0],
+    ["play", "half", 330],
+    ["play", "half", 330],
+    ["play", "half", 330],
+    ["rest", "whole", 0],
+    ["rest", "half", 0],
+    ["play", "whole", 311],
+    ["play", "whole", 294],
+    ["play", "double", 277]
+]
+let rightHandSeq2: [string, string, number][] = [
+    ["play", "half", 523],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 622],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 523],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 622],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 523],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 622],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "whole", 698],
+    ["play", "whole", 622],
+    ["play", "double", 587],
+    ["play", "half", 523],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 622],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 523],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 622],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 523],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "half", 622],
+    ["play", "half", 392],
+    ["play", "half", 587],
+    ["play", "half", 392],
+    ["play", "whole", 698],
+    ["play", "whole", 622],
+    ["play", "whole", 587],
+    ["play", "whole", 494],
+    ["play", "double", 523]
+]
+let leftHandSeq1: [string, string, number][] = [
+    ["rest", "half", 0],
+    ["play", "half", 294],
+    ["rest", "half", 0],
+    ["play", "half", 370],
+    ["play", "half", 440],
+    ["rest", "half", 0],
+    ["play", "half", 370],
+    ["rest", "half", 0],
+    ["play", "half", 294],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["rest", "whole", 0],
+    ["play", "half", 277],
+    ["play", "half", 294],
+    ["play", "half", 294],
+    ["play", "half", 370],
+    ["play", "half", 440],
+    ["rest", "half", 0],
+    ["play", "half", 370],
+    ["rest", "half", 0],
+    ["play", "half", 294],
+    ["play", "whole", 554],
+    ["play", "half", 554],
+    ["play", "half", 523],
+    ["play", "half", 494],
+    ["rest", "whole", 0],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["play", "half", 330],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["play", "half", 330],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["rest", "half", 0],
+    ["play", "half", 330],
+    ["rest", "half", 0],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["rest", "whole", 0],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["rest", "whole", 0],
+    ["rest", "half", 0],
+    ["play", "whole", 247],
+    ["play", "whole", 233],
+    ["play", "double", 220]
+]
+let leftHandSeq2: [string, string, number][] = [
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "whole", 175],
+    ["play", "whole", 175],
+    ["play", "double", 175],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 196],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 208],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "half", 262],
+    ["play", "whole", 175],
+    ["play", "whole", 175],
+    ["play", "whole", 175],
+    ["play", "whole", 196],
+    ["play", "double", 262]
+]
 monPos = [2, 4]
+radio.setGroup(0)
+radio.setGroup(1)
 // basic.showString("START!")
 led.plot(monPos[0], monPos[1])
 while (second <= 60) {
+    if (second == 20) {
+        radio.sendNumber(1)
+    } else if (second == 40) {
+        radio.sendNumber(2)
+    }
     drop()
     if (second % 2 == 1) {
         generateBananas()
@@ -79,251 +353,3 @@ while (second <= 60) {
 basic.clearScreen()
 basic.showString("" + (`SCORE:${score}`))
 basic.showString("END")
-
-
-radio.onReceivedNumber(function (receivedNumber) {
-    if (receivedNumber == 1) {
-        for (let index = 0; index < 1; index++) {
-            music.setTempo(315)
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(440, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Whole))
-            music.play(music.tonePlayable(277, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(440, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(554, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(554, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(494, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Whole))
-            music.rest(music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(330, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(330, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(330, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Whole))
-            music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-            music.rest(music.beat(BeatFraction.Whole))
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(music.tonePlayable(247, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(233, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-            music.play(music.tonePlayable(220, music.beat(BeatFraction.Double)), music.PlaybackMode.UntilDone)
-        }
-    } else {
-
-    }
-    if (receivedNumber == 2) {
-        for (let index = 0; index < 1; index++) {
-            music.setTempo(180)
-        }
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(175, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(175, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(175, music.beat(BeatFraction.Double)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(208, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(175, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(175, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(175, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(196, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-        music.play(music.tonePlayable(262, music.beat(BeatFraction.Double)), music.PlaybackMode.UntilDone)
-    }
-})
-radio.setGroup(0)
-for (let index = 0; index < 1; index++) {
-    music.setTempo(315)
-    radio.sendNumber(1)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(440, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(554, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(440, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(294, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Whole))
-    music.rest(music.beat(BeatFraction.Half))
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(440, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(554, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(440, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(659, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(659, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(622, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Whole))
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(415, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(554, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(554, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(554, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(370, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Half))
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(330, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(330, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(330, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Whole))
-    music.play(music.tonePlayable(330, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(330, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(330, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.rest(music.beat(BeatFraction.Whole))
-    music.rest(music.beat(BeatFraction.Half))
-    music.play(music.tonePlayable(311, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(294, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(277, music.beat(BeatFraction.Double)), music.PlaybackMode.UntilDone)
-}
-basic.pause(2000)
-for (let index = 0; index < 1; index++) {
-    music.setTempo(180)
-    radio.sendNumber(2)
-    music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(622, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(622, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(622, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(698, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(622, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Double)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(622, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(622, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(523, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(622, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(392, music.beat(BeatFraction.Half)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(698, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(622, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(587, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(494, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
-    music.play(music.tonePlayable(523, music.beat(BeatFraction.Double)), music.PlaybackMode.UntilDone)
-}
